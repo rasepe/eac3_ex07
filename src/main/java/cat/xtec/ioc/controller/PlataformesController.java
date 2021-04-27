@@ -25,17 +25,14 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/jocs")
 public class PlataformesController {
-
+    
     @Autowired
     private PlataformesService plataformesService;
-
-              @Autowired
-    private JocService jocService;
-
-  
-
     
-        @RequestMapping(value = "/add/plataformes", method = RequestMethod.POST)
+    @Autowired
+    private JocService jocService;
+    
+    @RequestMapping(value = "/add/plataformes", method = RequestMethod.POST)
     public String processAddNewJocForm(@ModelAttribute("newPlataformes") Plataformes newPlataformesToAdd, BindingResult result) {
         String[] suppressedFields = result.getSuppressedFields();
         if (suppressedFields.length > 0) {

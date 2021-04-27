@@ -29,12 +29,10 @@ public class ConduccioController {
     @Autowired
     private ConduccioService conduccioService;
 
-  @Autowired
+    @Autowired
     private JocService jocService;
-  
 
-    
-        @RequestMapping(value = "/add/conduccio", method = RequestMethod.POST)
+    @RequestMapping(value = "/add/conduccio", method = RequestMethod.POST)
     public String processAddNewConduccioForm(@ModelAttribute("newConduccio") Conduccio newConduccioToAdd, BindingResult result) {
         String[] suppressedFields = result.getSuppressedFields();
         if (suppressedFields.length > 0) {

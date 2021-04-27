@@ -27,15 +27,13 @@ public class JocController {
     @Autowired
     private JocService jocService;
 
-
-       @RequestMapping("/{name}")
+    @RequestMapping("/{name}")
     public ModelAndView getJocByName(@PathVariable("name") String nomJoc, HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ModelAndView modelview = new ModelAndView("stock");
         modelview.getModelMap().addAttribute("joc", jocService.getJocByName(nomJoc));
         return modelview;
     }
-   
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response)
@@ -48,64 +46,52 @@ public class JocController {
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public String processForm(@ModelAttribute("findJoc") Joc joc) {
-        return "redirect:/jocs/" + joc.getName(); 
+        return "redirect:/jocs/" + joc.getName();
     }
 
-        @RequestMapping(value = "/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
     public ModelAndView getAddNewTipusForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ModelAndView modelview = new ModelAndView("escullTipus");
-      //  Tipus newTipus = new Tipus();
-      //modelview.getModelMap().addAttribute("tipus", jocService.getAllTipus());
+        //  Tipus newTipus = new Tipus();
+        //modelview.getModelMap().addAttribute("tipus", jocService.getAllTipus());
         return modelview;
     }
-    
-            @RequestMapping(value = "/add/{tipus}", method = RequestMethod.GET)
+
+    @RequestMapping(value = "/add/{tipus}", method = RequestMethod.GET)
     public ModelAndView getAddNewJocForm(@PathVariable("tipus") String tipusJoc, HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       ModelAndView modelview1 = new ModelAndView("afegeixAventures");
-       ModelAndView modelview2 = new ModelAndView("afegeixConduccio"); 
-       ModelAndView modelview3 = new ModelAndView("afegeixPlataformes");
-       ModelAndView modelviewRetorn = null;
+        ModelAndView modelview1 = new ModelAndView("afegeixAventures");
+        ModelAndView modelview2 = new ModelAndView("afegeixConduccio");
+        ModelAndView modelview3 = new ModelAndView("afegeixPlataformes");
+        ModelAndView modelviewRetorn = null;
         if (tipusJoc.equals("aventures")) {
-             
+
             Aventures newAventures = new Aventures();
             modelview1.getModelMap().addAttribute("newAventures", newAventures);
             modelviewRetorn = modelview1;
         } else if (tipusJoc.equals("conduccio")) {
-            
+
             Conduccio newConduccio = new Conduccio();
             modelview2.getModelMap().addAttribute("newConduccio", newConduccio);
             modelviewRetorn = modelview2;
         } else if (tipusJoc.equals("plataformes")) {
-            
+
             Plataformes newPlataformes = new Plataformes();
             modelview3.getModelMap().addAttribute("newPlataformes", newPlataformes);
             modelviewRetorn = modelview3;
         }
-        
+
         return modelviewRetorn;
-       // return modelview;
+
     }
 
- 
-    
-
-    
-
-    
-
-    
-    
-    
-        @RequestMapping("/all")
+    @RequestMapping("/all")
     public ModelAndView allJocs(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ModelAndView modelview = new ModelAndView("jocs");
         modelview.getModelMap().addAttribute("jocs", jocService.getAllJocs());
         return modelview;
     }
-    
-    
-    
+
 }
